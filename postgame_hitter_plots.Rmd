@@ -1,0 +1,28 @@
+---
+title: 'UCLA Baseball 16 for 16 Reports'
+author: 'Taiyo Keilin'
+date: '`r Sys.Date()`'
+output: pdf_document
+geometry: 'left = 2cm, right = 2cm, top = 2cm, bottom = 2cm'
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE, include = FALSE}
+source('postgame_hitter_plots.R')
+```
+
+```{r, echo = FALSE, include = FALSE}
+trackman_data <- readr::read_csv('~/trackman_data.csv')
+
+Game <- trackman_data %>% filter(BatterTeam == 'UCLA')
+```
+
+```{r, echo = FALSE, results = 'asis', warning = FALSE, fig.height = 8, fig.width = 10, fig.align = 'center'}
+players <- names(table(Game$Batter))
+game_date <- 'March 26 vs UW'
+
+Hitter_Plot(Game, players, game_date)
+```
